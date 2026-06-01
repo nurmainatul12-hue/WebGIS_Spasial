@@ -1297,6 +1297,24 @@
 
         let uploadedLayer = null;
 
+		function onEachFeaturePopup(feature, layer){
+
+	    let content = "<table border='1' style='border-collapse:collapse;width:100%;'>";
+
+ 		   for(let key in feature.properties){
+
+        	content += `
+       		 <tr>
+            	<td><b>${key}</b></td>
+            	<td>${feature.properties[key]}</td>
+      		  </tr>
+	        `;
+		    }
+
+		    content += "</table>";
+
+ 			   layer.bindPopup(content);
+			}
         // ======================
         // TOMBOL UPLOAD
         // ======================
@@ -1343,6 +1361,7 @@
                             color:"#ff0000",
                             weight:3
                         }
+						onEachFeature: onEachFeaturePopup
                     }).addTo(map);
 
                     // Zoom otomatis
@@ -1377,6 +1396,7 @@
                             color:"#00aa00",
                             weight:3
                         }
+						onEachFeature: onEachFeaturePopup
                     }).addTo(map);
 
                     // Zoom otomatis
@@ -1404,6 +1424,7 @@
                                 color:"#0000ff",
                                 weight:3
                             }
+							onEachFeature: onEachFeaturePopup
                         }).addTo(map);
 
                         // Zoom otomatis
